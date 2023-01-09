@@ -8,8 +8,7 @@ import java.time.Duration;
 import org.junit.After;
 
 public class NavigationTest {
-    Steps steps = new Steps();
-    MainPage mainPage = new MainPage();
+    private MainPage mainPage = new MainPage();
 
     @After
     public void logOut(){

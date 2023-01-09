@@ -8,6 +8,7 @@ public class MainPage {
     private By profile = byText("Личный Кабинет");
     private By enter = byText("Войти");
     private By appHeader = byClassName("AppHeader_header__logo__2D0X2");
+
     public By getAssembleABurger() {
         return assembleABurger;
     }

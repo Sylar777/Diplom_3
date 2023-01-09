@@ -9,9 +9,9 @@ import static com.codeborne.selenide.Selenide.*;
 import java.time.Duration;
 
 public class RegistrationTest {
-    Steps steps = new Steps();
-    TestData testData;
-    RegistrationPage registrationPage = new RegistrationPage();
+    private Steps steps = new Steps();
+    private TestData testData;
+    private RegistrationPage registrationPage = new RegistrationPage();
 
     @Before
     public void setup(){
