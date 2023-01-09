@@ -4,13 +4,14 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import com.codeborne.selenide.Condition;
-import static com.codeborne.selenide.Selectors.*;
+import com.yandex.diplom3.PageObjects.LogInPage;
 import static com.codeborne.selenide.Selenide.*;
 import java.time.Duration;
 
 public class LogInTest {
     Steps steps = new Steps();
     TestData testData;
+    LogInPage logInPage = new LogInPage();
 
     @Before
     public void setup(){
@@ -27,42 +28,42 @@ public class LogInTest {
     public void logInFromMainPageTest(){
         steps.fillUpRegistrationForm(testData.getName(),testData.getMail(),testData.getPassword());
         open("https://stellarburgers.nomoreparties.site");
-        $(byText("Войти в аккаунт")).click();
+        $(logInPage.getLogInLink()).click();
         steps.fillUpLogInForm(testData.getMail(),testData.getPassword());
-        $(byText("Соберите бургер")).shouldBe(Condition.visible, Duration.ofSeconds(1));
+        $(logInPage.getAssembleABurger()).shouldBe(Condition.visible, Duration.ofSeconds(1));
     }
 
     @Test
     public void logInFromAppHeaderButtonTest(){
         steps.fillUpRegistrationForm(testData.getName(),testData.getMail(),testData.getPassword());
         open("https://stellarburgers.nomoreparties.site");
-        $(byText("Личный Кабинет")).click();
+        $(logInPage.getProfile()).click();
         steps.fillUpLogInForm(testData.getMail(),testData.getPassword());
-        $(byText("Соберите бургер")).shouldBe(Condition.visible, Duration.ofSeconds(1));
+        $(logInPage.getAssembleABurger()).shouldBe(Condition.visible, Duration.ofSeconds(1));
     }
 
     @Test
     public void logInAfterRegistrationTest(){
         steps.fillUpRegistrationForm(testData.getName(),testData.getMail(),testData.getPassword());
         steps.fillUpLogInForm(testData.getMail(),testData.getPassword());
-        $(byText("Соберите бургер")).shouldBe(Condition.visible, Duration.ofSeconds(1));
+        $(logInPage.getAssembleABurger()).shouldBe(Condition.visible, Duration.ofSeconds(1));
     }
 
     @Test
     public void logInByButtonOnRegistrationPageTest(){
         steps.fillUpRegistrationForm(testData.getName(),testData.getMail(),testData.getPassword());
         open("https://stellarburgers.nomoreparties.site/register");
-        $(byText("Войти")).click();
+        $(logInPage.getEnter()).click();
         steps.fillUpLogInForm(testData.getMail(),testData.getPassword());
-        $(byText("Соберите бургер")).shouldBe(Condition.visible, Duration.ofSeconds(1));
+        $(logInPage.getAssembleABurger()).shouldBe(Condition.visible, Duration.ofSeconds(1));
     }
 
     @Test
     public void logInByButtonOnForgotPasswordPageTest(){
         steps.fillUpRegistrationForm(testData.getName(),testData.getMail(),testData.getPassword());
         open("https://stellarburgers.nomoreparties.site/forgot-password");
-        $(byText("Войти")).click();
+        $(logInPage.getEnter()).click();
         steps.fillUpLogInForm(testData.getMail(),testData.getPassword());
-        $(byText("Соберите бургер")).shouldBe(Condition.visible, Duration.ofSeconds(1));
+        $(logInPage.getAssembleABurger()).shouldBe(Condition.visible, Duration.ofSeconds(1));
     }
 }
