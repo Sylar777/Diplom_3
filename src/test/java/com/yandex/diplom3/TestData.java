@@ -10,7 +10,6 @@ public class TestData {
         this.mail = "ds"+ new Random().nextInt(10000) + "@yandex.ru";
         this.password = "123541";
         this.name = "ds";
-        System.out.println("mail = " + mail + "password = " + password);
     }
 
     public String getName(){

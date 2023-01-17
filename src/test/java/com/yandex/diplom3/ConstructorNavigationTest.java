@@ -1,22 +1,39 @@
 package com.yandex.diplom3;
 
-import com.codeborne.selenide.Condition;
-import static com.codeborne.selenide.Selectors.*;
+import com.yandex.diplom3.pageobject.MainPage;
+import org.junit.Before;
 import static com.codeborne.selenide.Selenide.*;
-import java.time.Duration;
 import org.junit.Test;
-import org.openqa.selenium.By;
+import org.junit.runners.Parameterized;
+import org.junit.runner.RunWith;
 
+@RunWith(Parameterized.class)
 public class ConstructorNavigationTest {
+    MainPage mainPage;
+    String nameOfIngredientType;
+
+    public ConstructorNavigationTest(String nameOfIngredientType) {
+        this.nameOfIngredientType = nameOfIngredientType;
+    }
+
+    @Before
+    public void setup(){
+        mainPage = new MainPage();
+    }
+
+    @Parameterized.Parameters(name = "Название типа ингредиента: {0}")
+    public static Object[][] getCities() {
+        return new Object[][] {
+                { "Соусы" },
+                { "Начинки" }
+        };
+    }
 
     @Test
-    public void navigationToAppHeaderPageTest(){
-        open("https://stellarburgers.nomoreparties.site");
-        $(By.xpath("//span[text() = 'Начинки']/parent::*")).click();
-        $(byText("Сыр с астероидной плесенью")).shouldBe(Condition.visible, Duration.ofSeconds(1));
-        $(By.xpath("//span[text() = 'Соусы']/parent::*")).click();
-        $(byText("Соус Spicy-X")).shouldBe(Condition.visible, Duration.ofSeconds(1));
-        $(By.xpath("//span[text() = 'Булки']/parent::*")).click();
-        $(byText("Флюоресцентная булка R2-D3")).shouldBe(Condition.visible, Duration.ofSeconds(1));
+    public void constructorScrollNavigationTest(){
+        open(Urls.MAIN);
+        mainPage
+            .ingredientsButtonClick(nameOfIngredientType)
+            .checkStateOfTabs(nameOfIngredientType);
     }
 }

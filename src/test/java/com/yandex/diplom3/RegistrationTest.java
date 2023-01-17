@@ -3,13 +3,10 @@ package com.yandex.diplom3;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import com.codeborne.selenide.Condition;
-import com.yandex.diplom3.PageObjects.RegistrationPage;
+import com.yandex.diplom3.pageobject.RegistrationPage;
 import static com.codeborne.selenide.Selenide.*;
-import java.time.Duration;
 
 public class RegistrationTest {
-    private Steps steps = new Steps();
     private TestData testData;
     private RegistrationPage registrationPage = new RegistrationPage();
 
@@ -25,20 +22,23 @@ public class RegistrationTest {
 
     @Test
     public void registrationSuccessPassTest(){
-        steps.fillUpRegistrationForm(testData.getName(),testData.getMail(),testData.getPassword());
-        $(registrationPage.getEnter()).shouldBe(Condition.visible, Duration.ofSeconds(1));
+        registrationPage
+            .fillUpRegistrationForm(testData.getName(),testData.getMail(),testData.getPassword())
+            .checkRegistrationSuccess();
     }
 
     @Test
     public void registrationValidationTest(){
-        steps.fillUpRegistrationForm(testData.getName(),testData.getMail(),"14243");
-        $(registrationPage.getIncorrectPassword()).shouldBe(Condition.visible, Duration.ofSeconds(1));
+        registrationPage
+            .fillUpRegistrationForm(testData.getName(),testData.getMail(),"14243")
+            .checkIncorrectPasswordInsert();
     }
 
     @Test
     public void registrationDuplicateValidationTest(){
-        steps.fillUpRegistrationForm(testData.getName(),testData.getMail(),testData.getPassword());
-        steps.fillUpRegistrationForm(testData.getName(),testData.getMail(),testData.getPassword());
-        $(registrationPage.getTheSameUserAlreadyExist()).shouldBe(Condition.visible, Duration.ofSeconds(1));
+        registrationPage
+            .fillUpRegistrationForm(testData.getName(),testData.getMail(),testData.getPassword())
+            .fillUpRegistrationForm(testData.getName(),testData.getMail(),testData.getPassword())
+            .checkTheSameUserAlreadyExist();
     }
 }
