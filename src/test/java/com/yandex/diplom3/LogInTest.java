@@ -1,7 +1,6 @@
 package com.yandex.diplom3;
 
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import com.yandex.diplom3.pageobject.*;
@@ -12,16 +11,19 @@ public class LogInTest {
     private LogInPage logInPage = new LogInPage();
     private MainPage mainPage = new MainPage();
     private RegistrationPage registrationPage = new RegistrationPage();
+    DeleteUserStep deleteUserStep;
 
     @Before
     public void setup(){
         testData = new TestData();
+        deleteUserStep = new DeleteUserStep();
     }
 
     @After
     public void logOut(){
         mainPage.logOut();
         closeWebDriver();
+        deleteUserStep.deleteUser(testData.getMail(),testData.getPassword());
     }
 
     @Test

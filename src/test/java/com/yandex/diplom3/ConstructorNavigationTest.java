@@ -22,7 +22,7 @@ public class ConstructorNavigationTest {
     }
 
     @Parameterized.Parameters(name = "Название типа ингредиента: {0}")
-    public static Object[][] getCities() {
+    public static Object[][] getTabName() {
         return new Object[][] {
                 { "Соусы" },
                 { "Начинки" }

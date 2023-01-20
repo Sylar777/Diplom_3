@@ -19,15 +19,13 @@ public class MainPage extends CommonPage{
 
     public MainPage ingredientsButtonClick(String nameOfIngredientType){
         $(getIngredientTypeButton(nameOfIngredientType)).click();
-        try {
-            Thread.sleep(1000, 0);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        $(getIngredientTypeTab(nameOfIngredientType))
+        .shouldBe(attribute("class", "tab_tab__1SPyG tab_tab_type_current__2BEPc pt-4 pr-10 pb-4 pl-10 noselect"), Duration.ofSeconds(3));
         return this;
     }
 
     public void checkStateOfTabs(String nameOfIngredientType){
-        $(getIngredientTypeTab(nameOfIngredientType)).shouldHave(attribute("class", "tab_tab__1SPyG tab_tab_type_current__2BEPc pt-4 pr-10 pb-4 pl-10 noselect"));
+        $(getIngredientTypeTab(nameOfIngredientType))
+        .shouldHave(attribute("class", "tab_tab__1SPyG tab_tab_type_current__2BEPc pt-4 pr-10 pb-4 pl-10 noselect"));
     }
 }

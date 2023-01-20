@@ -9,15 +9,18 @@ import static com.codeborne.selenide.Selenide.*;
 public class RegistrationTest {
     private TestData testData;
     private RegistrationPage registrationPage = new RegistrationPage();
+    DeleteUserStep deleteUserStep;
 
     @Before
     public void setup(){
         testData = new TestData();
+        deleteUserStep = new DeleteUserStep();
     }
 
     @After
     public void logOut(){
         closeWebDriver();
+        deleteUserStep.deleteUser(testData.getMail(),testData.getPassword());
     }
 
     @Test

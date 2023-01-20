@@ -2,12 +2,14 @@ package com.yandex.diplom3.pageobject;
 
 import static com.codeborne.selenide.Selenide.*;
 import com.codeborne.selenide.Condition;
+import com.yandex.diplom3.Urls;
+
 import java.time.Duration;
 
 public class RegistrationPage extends CommonPage {
 
     public RegistrationPage fillUpRegistrationForm(String name, String mail, String password){
-        open("https://stellarburgers.nomoreparties.site/register");
+        open(Urls.REGISTRATION);
         $(nameField).sibling(0).setValue(name);
         $(emailField).sibling(0).setValue(mail);
         $(passwordField).sibling(0).setValue(password);
